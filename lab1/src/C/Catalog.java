@@ -147,24 +147,31 @@ public class Catalog
   {
     final OutputStreamWriter stream = new OutputStreamWriter(output);
     noError = true;
-    catalog.forEach(new BiConsumer<Integer, Book>()
+    if (catalog.isEmpty())
     {
-      @Override
-      public void accept(Integer integer, Book bookInfo)
+      stream.write("<EMPTY>\n");
+    }
+    else
+    {
+      catalog.forEach(new BiConsumer<Integer, Book>()
       {
-        try
+        @Override
+        public void accept(Integer integer, Book bookInfo)
         {
-          stream.write("id: " + integer.toString() + "\n");
-          stream.write("name: " + bookInfo.name + "\n");
-          stream.write("autor: " + bookInfo.autor + "\n");
-          stream.write("year: " + bookInfo.year + "\n\n");
+          try
+          {
+            stream.write("id: " + integer.toString() + "\n");
+            stream.write("name: " + bookInfo.name + "\n");
+            stream.write("autor: " + bookInfo.autor + "\n");
+            stream.write("year: " + bookInfo.year + "\n\n");
+          }
+          catch (IOException ex)
+          {
+            noError = false;
+          }
         }
-        catch (IOException ex)
-        {
-          noError = false;
-        }
-      }
-    });
+      });
+    }
     stream.flush();
     if (!noError)
     {

@@ -8,7 +8,7 @@ public class Main
   public static void main(String[] args)
   {
     MyStringBuilder stringBuilder = new MyStringBuilder();
-    stringBuilder.append("begin balue");
+    stringBuilder.append("begin value");
     System.out.println("stringbulider has value: "+ stringBuilder.toString());
     stringBuilder.insert(0,"second ");
     System.out.println("stringbulider after insert has value: "+ stringBuilder.toString());
@@ -18,7 +18,7 @@ public class Main
     Random random = new Random(date.getTime());
     for (int i = 0; i < 10; i++)
     {
-      stringBuilder.append('A' + random.nextInt(26));
+      stringBuilder.append((char) ('A' + random.nextInt(26)));
     }
     System.out.println("stringbulider after 10 appends has value: "+ stringBuilder.toString());
     for (int i = 0; i < 10; i++)

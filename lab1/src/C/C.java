@@ -54,8 +54,8 @@ public class C implements Runnable
       while (true)
       {
         choice = '0';
-        System.out.println("1. добавить книгу\n2. заменить книгу по Id,\n3. найти книгу\n4.выйти");
-        while (choice < '1' || choice > '4')
+        System.out.println("1. добавить книгу\n2. заменить книгу по Id,\n3. найти книгу\n4. вывести каталог \n5.выйти");
+        while (choice < '1' || choice > '5')
         {
           String str = sc.nextLine();
           if (str.length() ==  1)
@@ -214,6 +214,17 @@ public class C implements Runnable
           }
           break;
         case '4':
+          System.out.println("Каталог содержит следующие книги:");
+          try
+          {
+            catalog.printInStream(System.out);
+          }
+          catch (Exception ex)
+          {
+            System.out.println("ошибка вывода");
+          }
+          break;
+        case '5':
           {
             choice = '0';
             while (choice != 'y' && choice != 'n')

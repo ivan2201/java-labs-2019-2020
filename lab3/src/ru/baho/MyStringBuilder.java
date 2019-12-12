@@ -6,12 +6,18 @@ import java.lang.StringBuilder;
 public class MyStringBuilder
 {
   private StringBuilder strBuilder;
-  ArrayDeque<String> stack;
+
+  private ArrayDeque< ReverseFunction > stack;
 
   MyStringBuilder()
   {
-    stack = new ArrayDeque<String>();
+    stack = new ArrayDeque< ReverseFunction >();
     strBuilder = new StringBuilder();
+  }
+
+  interface ReverseFunction
+  {
+    public void reverse();
   }
 
   public int compareTo(MyStringBuilder another)
@@ -27,205 +33,475 @@ public class MyStringBuilder
 
   public MyStringBuilder append(String str)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.append(str);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(length, newLength);
+                    }
+                  }
+    );
     return this;
   }
 
   public MyStringBuilder append(StringBuffer sb)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.append(sb);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(length, newLength);
+                    }
+                  }
+    );
     return this;
   }
 
 
   public MyStringBuilder append(CharSequence s)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.append(s);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(length, newLength);
+                    }
+                  }
+    );
     return this;
   }
 
   public MyStringBuilder append(CharSequence s, int start, int end)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.append(s, start, end);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(length, newLength);
+                    }
+                  }
+    );
     return this;
   }
 
 
   public MyStringBuilder append(char[] str)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.append(str);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(length, newLength);
+                    }
+                  }
+    );
     return this;
   }
 
   public MyStringBuilder append(char[] str, int offset, int len)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.append(str, offset, len);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(length, newLength);
+                    }
+                  }
+    );
     return this;
   }
 
 
   public MyStringBuilder append(boolean b)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.append(b);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(length, newLength);
+                    }
+                  }
+    );
     return this;
   }
 
   public MyStringBuilder append(char c)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.append(c);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(length, newLength);
+                    }
+                  }
+    );
     return this;
   }
 
   public MyStringBuilder append(int i)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.append(i);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(length, newLength);
+                    }
+                  }
+    );
     return this;
   }
 
 
   public MyStringBuilder append(long lng)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.append(lng);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(length, newLength);
+                    }
+                  }
+    );
     return this;
   }
 
 
   public MyStringBuilder append(float f)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.append(f);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(length, newLength);
+                    }
+                  }
+    );
     return this;
   }
 
 
   public MyStringBuilder append(double d)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.append(d);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(length, newLength);
+                    }
+                  }
+    );
     return this;
   }
 
   public MyStringBuilder appendCodePoint(int codePoint)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.appendCodePoint(codePoint);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(length, newLength);
+                    }
+                  }
+    );
     return this;
   }
 
   public MyStringBuilder delete(int start, int end)
   {
-    stack.addLast(strBuilder.toString());
+    final int position = start;
+    final String str = strBuilder.substring(start, end);
     strBuilder.delete(start, end);
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.insert(position,str);
+                    }
+                  }
+    );
     return this;
   }
 
-  public MyStringBuilder deleteCharAt(int index)
+  public MyStringBuilder deleteCharAt(final int index)
   {
-    stack.addLast(strBuilder.toString());
+    final char ch = strBuilder.charAt(index);
     strBuilder.deleteCharAt(index);
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.insert(index, ch);
+                    }
+                  }
+    );
     return this;
   }
 
-  public MyStringBuilder replace(int start, int end, String str)
+  public MyStringBuilder replace(final int start, final int end, String str)
   {
-    stack.addLast(strBuilder.toString());
+    final String strOld = strBuilder.substring(start, end);
     strBuilder.replace(start, end, str);
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.replace(start, end, strOld);
+                    }
+                  }
+    );
     return this;
   }
 
-  public MyStringBuilder insert(int index, char[] str, int offset,
-                                int len)
+  public MyStringBuilder insert(final int index, char[] str, int offset,
+                                final int len)
   {
-    stack.addLast(strBuilder.toString());
     strBuilder.insert(index, str, offset, len);
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(index, index + len);
+                    }
+                  }
+    );
     return this;
   }
 
-  public MyStringBuilder insert(int offset, Object obj)
+  public MyStringBuilder insert(final int offset, Object obj)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.insert(offset, obj);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(offset, newLength - length + offset);
+                    }
+                  }
+    );
     return this;
   }
 
-  public MyStringBuilder insert(int offset, String str)
+  public MyStringBuilder insert(final int offset, String str)
   {
-    stack.addLast(strBuilder.toString());
     strBuilder.insert(offset, str);
+    final int delta = str.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(offset, offset + delta);
+                    }
+                  }
+    );
     return this;
   }
 
-  public MyStringBuilder insert(int offset, char[] str)
+  public MyStringBuilder insert(final int offset, char[] str)
   {
-    stack.addLast(strBuilder.toString());
     strBuilder.insert(offset, str);
+    final int delta = str.length;
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(offset, offset + delta);
+                    }
+                  }
+    );
     return this;
   }
 
-  public MyStringBuilder insert(int dstOffset, CharSequence s)
+  public MyStringBuilder insert(final int dstOffset, CharSequence s)
   {
-    stack.addLast(strBuilder.toString());
     strBuilder.insert(dstOffset, s);
+    final int delta = s.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(dstOffset, dstOffset + delta);
+                    }
+                  }
+    );
     return this;
   }
 
-  public MyStringBuilder insert(int dstOffset, CharSequence s,
-                                int start, int end)
+  public MyStringBuilder insert(final int dstOffset, CharSequence s,
+                                final int start, final int end)
   {
-    stack.addLast(strBuilder.toString());
     strBuilder.insert(dstOffset, s, start, end);
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(dstOffset, dstOffset + end - start);
+                    }
+                  }
+    );
     return this;
   }
 
-  public MyStringBuilder insert(int offset, boolean b)
+  public MyStringBuilder insert(final int offset, boolean b)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.insert(offset, b);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(offset, newLength - length + offset);
+                    }
+                  }
+    );
     return this;
   }
 
-  public MyStringBuilder insert(int offset, char c)
+  public MyStringBuilder insert(final int offset, char c)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.insert(offset, c);
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(offset, offset + 1);
+                    }
+                  }
+    );
     return this;
   }
 
-  public MyStringBuilder insert(int offset, int i)
+  public MyStringBuilder insert(final int offset, int i)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.insert(offset, i);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(offset, newLength - length + offset);
+                    }
+                  }
+    );
     return this;
   }
 
-  public MyStringBuilder insert(int offset, long l)
+  public MyStringBuilder insert(final int offset, long l)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.insert(offset, l);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(offset, newLength - length + offset);
+                    }
+                  }
+    );
     return this;
   }
 
-  public MyStringBuilder insert(int offset, float f)
+  public MyStringBuilder insert(final int offset, float f)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.insert(offset, f);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(offset, newLength - length + offset);
+                    }
+                  }
+    );
     return this;
   }
 
-  public MyStringBuilder insert(int offset, double d)
+  public MyStringBuilder insert(final int offset, double d)
   {
-    stack.addLast(strBuilder.toString());
+    final int length = strBuilder.length();
     strBuilder.insert(offset, d);
+    final int newLength = strBuilder.length();
+    stack.addLast(new ReverseFunction()
+                  {
+                    @Override
+                    public void reverse()
+                    {
+                      strBuilder.delete(offset, newLength - length + offset);
+                    }
+                  }
+    );
     return this;
   }
 
@@ -256,8 +532,15 @@ public class MyStringBuilder
 
   public MyStringBuilder reverse()
   {
-    stack.addLast(strBuilder.toString());
     strBuilder.reverse();
+    stack.push(new ReverseFunction()
+    {
+      @Override
+      public void reverse()
+      {
+        strBuilder.reverse();
+      }
+    });
     return this;
   }
 
@@ -268,7 +551,7 @@ public class MyStringBuilder
 
   public MyStringBuilder undo()
   {
-    strBuilder = new StringBuilder(stack.pollLast());
+    stack.pollLast().reverse();
     return this;
   }
 }
