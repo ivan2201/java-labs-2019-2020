@@ -19,6 +19,7 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Main extends Application
@@ -108,6 +109,7 @@ public class Main extends Application
     });
     return nodes;
   }
+  ObservableList< FileNode > fileNodes;
 
   @Override
   public void start(Stage stage)
@@ -118,7 +120,7 @@ public class Main extends Application
     Button editButton = new Button("edit");
     Button createFileButton = new Button("createButton");
     Button deleteFileButton = new Button("deleteButton");
-    ObservableList< FileNode > fileNodes = FXCollections.observableArrayList(getNodes(null));
+    fileNodes = FXCollections.observableArrayList(getNodes(null));
     ListView<FileNode> listView = new ListView<FileNode>(fileNodes);
     backButton.setOnMouseClicked(event ->
     {
@@ -129,20 +131,93 @@ public class Main extends Application
         listView.refresh();
       }
     });
-    editButton.setOnMouseClicked(event ->
-    {
-      if (curPath != null)
+    editButton.setOnMouseClicked(event -> {
+      if (listView.getSelectionModel().getSelectedItem() != null && !listView.getSelectionModel().getSelectedItem().isDir)
       {
-        openEditor(stage, new File(curPath.getAbsolutePath() + File.separator + listView.getSelectionModel().getSelectedItem().name));
-      }
-      else
-      {
-        openEditor(stage, new File(listView.getSelectionModel().getSelectedItem().name));
+        if (curPath != null)
+        {
+          openEditor(stage, new File(curPath.getAbsolutePath() + File.separator + listView.getSelectionModel().getSelectedItem().name));
+        }
+        else
+        {
+          openEditor(stage, new File(listView.getSelectionModel().getSelectedItem().name));
+        }
       }
     });
-    listView.setOnMousePressed(event ->
-    {
-      if (listView.getSelectionModel().getSelectedItem().isDir)
+    createFileButton.setOnMouseClicked(event -> {
+      if (curPath != null)
+      {
+        TextInputDialog textInputDialog = new TextInputDialog("new_file");
+        textInputDialog.setTitle("create file dialog");
+        textInputDialog.setHeaderText("введите имя создаваемого файла");
+        textInputDialog.setContentText("Name:");
+        Optional<String> result = textInputDialog.showAndWait();
+
+        result.ifPresent(name -> {
+          File tmp = new File(curPath.getAbsolutePath() + File.separator + name);
+          boolean ok = true;
+          try
+          {
+            if (!tmp.exists())
+            {
+              if (!tmp.createNewFile()) ok = false;
+            }
+            else
+            {
+              ok = false;
+            }
+          }
+          catch (IOException ex)
+          {
+            ok = false;
+          }
+          if (ok)
+          {
+            textInputDialog.close();
+            fileNodes.setAll(getNodes());
+          }
+          else
+          {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("error, can't create file");
+            alert.show();
+          }
+        });
+      }
+    });
+    deleteFileButton.setOnMouseClicked(event -> {
+      if (curPath != null)
+      {
+        boolean ok = true;
+        try
+        {
+          File tmp = new File(curPath + File.separator + listView.getSelectionModel().getSelectedItem().name);
+          if (tmp.exists())
+          {
+            if (!tmp.delete()) ok = false;
+          }
+          else
+          {
+            ok = false;
+          }
+        } catch (Exception ex)
+        {
+          ok = false;
+        }
+        if (ok)
+        {
+          fileNodes.setAll(getNodes());
+        }
+        else
+        {
+          Alert alert = new Alert(Alert.AlertType.ERROR);
+          alert.setContentText("error, can't delete file");
+          alert.show();
+        }
+      }
+    });
+    listView.setOnMousePressed(event -> {
+      if (listView.getSelectionModel().getSelectedItem() != null && listView.getSelectionModel().getSelectedItem().isDir)
       {
         if (curPath != null)
         {
@@ -157,7 +232,8 @@ public class Main extends Application
         listView.refresh();
       }
     });
-    FlowPane root = new FlowPane(Orientation.VERTICAL, 10,10, listView, backButton, editButton);
+    FlowPane root = new FlowPane(Orientation.VERTICAL, 10,10, listView, backButton, createFileButton,
+            deleteFileButton,editButton);
     stage.setTitle("FileExplorer");
 
     sceneMain = new Scene(root, 600, 400);
